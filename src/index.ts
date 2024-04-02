@@ -3,7 +3,7 @@ const app = express();
 const dotenv = require("dotenv");
 dotenv.config();
 const cors = require("cors")
-import dbConnect from "./util/dbConnect";
+const dbConnect = require("./util/dbConnect");
 const cookieParser = require("cookie-parser");
 const bodyParser = require("body-parser");
 
