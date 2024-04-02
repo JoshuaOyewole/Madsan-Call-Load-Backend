@@ -4,9 +4,9 @@
   "description": "API for Dixre Assessment",
   "main": "./src/index.ts ",
   "scripts": {
-    "start": "tsc && node dist/index.js",
+    "start": "tsc && node dist/index.ts",
     "dev": "nodemon src/index.ts",
-   "build": "mkdir -p dist && tsc -p ."
+    "build": "mkdir -p dist && tsc -p ."
   },
   "license": "MIT",
   "author": "Joshua Oyewole",
@@ -22,7 +22,7 @@
     "@types/cookie-parser": "^1.4.3",
     "@types/cors": "^2.8.13",
     "@types/express": "^4.17.17",
-    "@types/node": "^20.4.1",
+    "@types/node": "^20.12.2",
     "@types/nodemailer": "^6.4.8",
     "bcrypt": "^5.1.1",
     "bcryptjs": "^2.4.3",
