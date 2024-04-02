@@ -9,4 +9,4 @@ const createError = (status: number, message: string) => {
   err.status =status;
   return err;
 };
-module.exports = createError;
+export default createError; 

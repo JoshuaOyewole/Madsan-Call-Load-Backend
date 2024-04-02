@@ -20,7 +20,7 @@ async function checkExistingState(state: string) {
 }
 
 /* GET ALL STATES */
-export async function getAllStates(req: Request, res: Response, next: NextFunction) {
+async function getAllStates(req: Request, res: Response, next: NextFunction) {
     try {
         const states = await StateModel.find({});
         return res.status(StatusCodes.OK).json({ data: states });
@@ -28,14 +28,14 @@ export async function getAllStates(req: Request, res: Response, next: NextFuncti
         next(createError(StatusCodes.INTERNAL_SERVER_ERROR, `${error.message})}`))
     }
 }
-export async function getState(req: Request, res: Response, next: NextFunction) {
+async function getState(req: Request, res: Response, next: NextFunction) {
     const name = req.query.name;
 
     if (!name) {
         return res.status(StatusCodes.BAD_REQUEST).json({ data: { message: "Kindly enter a valid State Name" } })
     }
     try {
-        const state = await StateModel.findOne({name:name});
+        const state = await StateModel.findOne({ name: name });
         // If state is not found, return 404 Not Found
         if (!state) {
             return res.status(StatusCodes.NOT_FOUND).json({ message: 'State not found' });
@@ -49,7 +49,7 @@ export async function getState(req: Request, res: Response, next: NextFunction) 
 }
 
 /* ADD A STATE */
-export async function addState(req: Request, res: Response, next: NextFunction) {
+async function addState(req: Request, res: Response, next: NextFunction) {
 
     let { name } = req.body;
 
@@ -86,7 +86,7 @@ export async function addState(req: Request, res: Response, next: NextFunction) 
 }
 
 
-export async function multipleState(req: Request, res: Response) {
+async function multipleState(req: Request, res: Response) {
     try {
         // Insert the array of state objects into the database
         const result = await StateModel.insertMany(req.body);
@@ -97,3 +97,6 @@ export async function multipleState(req: Request, res: Response) {
         throw error; // Rethrow the error for handling in the caller
     }
 }
+
+
+module.exports = {getAllStates, getState,addState,multipleState}

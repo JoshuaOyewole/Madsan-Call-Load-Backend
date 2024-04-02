@@ -1,11 +1,11 @@
 import { NextFunction, Request, Response } from "express";
 import { StatusCodes } from "http-status-codes";
 const createError = require("../../util/error");
-import OrderModel from "models/orders";
-import InvoiceModel from "models/invoice";
-import Company from "models/company";
+const OrderModel =require( "models/orders");
+const InvoiceModel = require( "models/invoice");
+const Company  = require("../../models/company");
 
-export async function createInvoice(req: Request, res: Response, next: NextFunction) {
+ async function createInvoice(req: Request, res: Response, next: NextFunction) {
 
     const { orderId } = req.body;
 
@@ -35,3 +35,5 @@ export async function createInvoice(req: Request, res: Response, next: NextFunct
 
     }
 }
+
+module.exports = createInvoice

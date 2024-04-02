@@ -1,21 +1,21 @@
-const express = require("express");
+import express from "express";
 const app = express();
-const dotenv = require("dotenv");
+import dotenv from "dotenv";
 dotenv.config();
-const cors = require("cors")
-const dbConnect = require("./util/dbConnect");
-const cookieParser = require("cookie-parser");
-const bodyParser = require("body-parser");
+import cors from "cors"
+import dbConnect from "./util/dbConnect";
+import cookieParser from "cookie-parser";
+import bodyParser from "body-parser";
 
 // MIDDLEWARES IMPORT
-const error = require("./util/error");
+import error from "./middleware/error"
 
 //ROUTES IMPORTATION0
-const loginRoute = require("./routes/auth/login");
-const ordersRoute = require("./routes/orders/index");
+import loginRoute from "./routes/auth/login";
+/* const ordersRoute = require("./routes/orders/index");
 const stateRoute = require("./routes/states/index");
 const companyRoute = require("./routes/company/index");
-const purchaseRoute = require("./routes/orders/index");
+const purchaseRoute = require("./routes/orders/index"); */
 
 
 //DB INITIALIZATION
@@ -28,11 +28,11 @@ app.use(cors());
 app.use(cookieParser());
 
 //ROUTES
-app.use("/api/states", stateRoute);
+/* app.use("/api/states", stateRoute);
 app.use("/api/companies", companyRoute);
-app.use("/api/purchase", purchaseRoute);
+app.use("/api/purchase", purchaseRoute); */
 app.use("/api/login", loginRoute);
-app.use("/api/orders", ordersRoute);
+//app.use("/api/orders", ordersRoute);
 
 //ERROR HANDLING MIDDLEWARE
 app.use(error);

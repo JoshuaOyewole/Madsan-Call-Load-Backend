@@ -3,7 +3,7 @@ import { Request, Response, NextFunction } from 'express';
 const createError = require("../../util/error");
 import { sendOTP, verifyOTP, deleteOTP } from "../../util/OTP";
 import { hashData } from "../../util/hashData";
-import Company from "../../models/company";
+const Company = require("../../models/company");
 
 
 const forgetPWD = async (req: Request, res: Response, next: NextFunction) => {
@@ -30,7 +30,7 @@ const forgetPWD = async (req: Request, res: Response, next: NextFunction) => {
         await sendOTP(otpDetails);
 
         res.status(200).json({
-            data: {email:email},
+            data: { email: email },
             status: 200,
             message: `OTP has been successfully sent to your Email!`,
         });
@@ -45,7 +45,7 @@ const resetPWD = async (req: Request, res: Response, next: NextFunction) => {
 
         /* VALIDATIONs */
         if (!(email && otp && newPassword)) {
-            return res.status(400).json({error:'Empty Credentials are not allowed!'})
+            return res.status(400).json({ error: 'Empty Credentials are not allowed!' })
         }
 
         const validOTP = await verifyOTP({ email, otp });
@@ -76,4 +76,4 @@ const resetPWD = async (req: Request, res: Response, next: NextFunction) => {
         next(createError(400, err.message))
     }
 }
-export { forgetPWD, resetPWD }
+module.exports = { forgetPWD, resetPWD }

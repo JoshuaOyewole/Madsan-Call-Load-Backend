@@ -11,5 +11,6 @@ const err = (err:
         stack: err.stack
     })
 }
+ err; 
 
-export default err; 
+ export default err;

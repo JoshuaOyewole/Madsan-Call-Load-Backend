@@ -1,6 +1,6 @@
-const express = require('express');
+import express = require('express');
 //import {verifyToken} from "../../middleware/verifyToken";
-import { addCompany, companiesByState, getCompanies, getCompany, companyBranches, getBranchesBystate, companiesByLocation } from '../../controllers/comapny/index';
+const { addCompany, companiesByState, getCompanies, getCompany, companyBranches, getBranchesBystate, companiesByLocation } = require('../../controllers/comapny/index');
 
 const router = express.Router();
 

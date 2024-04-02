@@ -1,4 +1,4 @@
-import User from "../../models/company";
+const User = require("../../models/company");
 import { Request, Response, NextFunction } from 'express';
 const bcrypt = require("bcryptjs");
 const createError = require("../../util/error");
@@ -110,5 +110,4 @@ const logout = async (req: Request, res: Response, next: NextFunction) => {
     next(err);
   }
 };
-
-export { login, logout } 
+export default login

@@ -1,5 +1,5 @@
 const express = require('express');
-import { getAllOrders, updateOrder, makeOrder, getOrder } from "../../controllers/orders";
+const { getAllOrders, updateOrder, makeOrder, getOrder } = require( "../../controllers/orders");
 //import {verifyToken} from "../../middleware/verifyToken";
 
 const router = express.Router();

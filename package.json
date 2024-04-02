@@ -3,7 +3,6 @@
   "version": "1.0.0",
   "description": "API for Dixre Assessment",
   "main": "./src/index.ts ",
-  "type": "commonjs",
   "scripts": {
     "start": "tsc && node dist/index.js",
     "dev": "nodemon src/index.ts",

@@ -1,6 +1,6 @@
 import { NextFunction, Request, Response } from "express";
 import { StatusCodes } from "http-status-codes";
-import Company from "../../models/company";
+const Company = require("../../models/company");
 const createError = require("../../util/error");
 const bcrypt = require("bcryptjs");
 import StateModel from "../../models/states";
@@ -29,7 +29,7 @@ async function checkExistingEmailAndPhone(email: string, phoneNumber: string) {
 }
 
 /* GET ALL COMPANIES BASED ON A STATE*/
-export async function companiesByState(req: Request, res: Response, next: NextFunction) {
+ async function companiesByState(req: Request, res: Response, next: NextFunction) {
     const { state } = req.query;
 
     try {
@@ -51,7 +51,7 @@ export async function companiesByState(req: Request, res: Response, next: NextFu
     }
 
 }
-export async function getBranchesBystate(req: Request, res: Response, next: NextFunction) {
+ async function getBranchesBystate(req: Request, res: Response, next: NextFunction) {
     const { state } = req.query;
 
     try {
@@ -106,7 +106,7 @@ export async function getBranchesBystate(req: Request, res: Response, next: Next
     }
 
 }
-export async function companiesByLocation(req: Request, res: Response, next: NextFunction) {
+ async function companiesByLocation(req: Request, res: Response, next: NextFunction) {
     const { locationId } = req.query;
 
     try {
@@ -126,7 +126,7 @@ export async function companiesByLocation(req: Request, res: Response, next: Nex
         next(createError(StatusCodes.INTERNAL_SERVER_ERROR, `${error.message})}`))
     }
 }
-export async function companyBranches(req: Request, res: Response, next: NextFunction) {
+ async function companyBranches(req: Request, res: Response, next: NextFunction) {
     const { companyId, state } = req.query;
 
     try {
@@ -147,7 +147,7 @@ export async function companyBranches(req: Request, res: Response, next: NextFun
         next(createError(StatusCodes.INTERNAL_SERVER_ERROR, `${error.message})}`))
     }
 }
-export async function addCompany(req: Request, res: Response, next: NextFunction) {
+ async function addCompany(req: Request, res: Response, next: NextFunction) {
 
     const { companyName, companyAddress, email, phoneNumber, password, category, accountNumber, accountName, bankName, states, branches } = req.body;
 
@@ -183,7 +183,7 @@ export async function addCompany(req: Request, res: Response, next: NextFunction
     }
 }
 
-export async function getCompanies(req: Request, res: Response, next: NextFunction) {
+ async function getCompanies(req: Request, res: Response, next: NextFunction) {
     try {
         const companies = await Company.find().select('-password');
 
@@ -198,7 +198,7 @@ export async function getCompanies(req: Request, res: Response, next: NextFuncti
     }
 }
 
-export async function getCompany(req: Request, res: Response, next: NextFunction) {
+ async function getCompany(req: Request, res: Response, next: NextFunction) {
 
     const id = req.params.id;
 
@@ -218,3 +218,5 @@ export async function getCompany(req: Request, res: Response, next: NextFunction
         next(createError(StatusCodes.INTERNAL_SERVER_ERROR, `${err.message})}`))
     }
 }
+
+module.exports = {checkExistingEmailAndPhone,companiesByState,getBranchesBystate,companiesByLocation,companyBranches,addCompany,getCompanies}

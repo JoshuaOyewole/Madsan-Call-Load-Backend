@@ -4,7 +4,7 @@ const createError = require("../../util/error");
 import OrderModel from "../../models/orders";
 
 
-export async function makeOrder(req: Request, res: Response, next: NextFunction) {
+async function makeOrder(req: Request, res: Response, next: NextFunction) {
 
     const { buyerCompanyName, email, sellerCompanyState, sellerCompanyName, pickupStateAddress, buyerDestination, quantity, productAmount, totalCost, sellerCompanyId, buyerCompanyId } = req.body;
 
@@ -31,7 +31,7 @@ export async function makeOrder(req: Request, res: Response, next: NextFunction)
 
     }
 }
-export async function getOrder(req: Request, res: Response, next: NextFunction) {
+async function getOrder(req: Request, res: Response, next: NextFunction) {
 
     const { id } = req.query;
 
@@ -53,7 +53,7 @@ export async function getOrder(req: Request, res: Response, next: NextFunction) 
         next(createError(StatusCodes.INTERNAL_SERVER_ERROR, `${error.message})}`))
     }
 }
-export async function updateOrder(req: Request, res: Response, next: NextFunction) {
+async function updateOrder(req: Request, res: Response, next: NextFunction) {
     try {
         const {
             buyerCompanyName,
@@ -105,7 +105,7 @@ export async function updateOrder(req: Request, res: Response, next: NextFunctio
         res.status(500).json({ message: 'Internal server error' });
     }
 }
-export async function getAllOrders(req: Request, res: Response, next: NextFunction) {
+async function getAllOrders(req: Request, res: Response, next: NextFunction) {
     try {
         const orders = await OrderModel.find();
 
@@ -122,3 +122,6 @@ export async function getAllOrders(req: Request, res: Response, next: NextFuncti
         next(createError(StatusCodes.INTERNAL_SERVER_ERROR, `${error.message})}`))
     }
 }
+
+
+module.exports = { makeOrder, getOrder, updateOrder, getAllOrders }

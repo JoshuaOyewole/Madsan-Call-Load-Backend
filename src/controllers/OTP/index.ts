@@ -20,4 +20,4 @@ const sendOTPController = async (req: Request, res: Response, next: NextFunction
 
 }
 
-export { sendOTPController };
+module.exports = sendOTPController;

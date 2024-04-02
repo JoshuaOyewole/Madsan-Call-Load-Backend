@@ -1,4 +1,4 @@
-import jwt from "jsonwebtoken";
+const jwt = require("jsonwebtoken");
 const createError = require("../util/error");
 import { Request, Response, NextFunction } from 'express';
 
@@ -9,7 +9,7 @@ const verifyToken = (req: Request, res: Response, next: NextFunction) => {
     if (token) {
 
         //verify if a token is valid. If not valid throw an error
-        jwt.verify(token, process.env.JWT_SECRET, (err, data) => {
+        jwt.verify(token, process.env.JWT_SECRET, (err: any, data: any) => {
 
             //if valid, access the data in the token in a req variable
             if (!err) {
@@ -26,4 +26,4 @@ const verifyToken = (req: Request, res: Response, next: NextFunction) => {
 };
 
 
-export { verifyToken }
+module.exports = verifyToken;
