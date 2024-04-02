@@ -1,11 +1,11 @@
-import express from "express";
+const express = require("express");
 const app = express();
-import dotenv from "dotenv";
+const dotenv = require("dotenv");
 dotenv.config();
-import cors from "cors"
+const cors = require("cors")
 import dbConnect from "./util/dbConnect";
-import cookieParser from "cookie-parser";
-import bodyParser from "body-parser";
+const cookieParser = require("cookie-parser");
+const bodyParser = require("body-parser");
 
 // MIDDLEWARES IMPORT
 import error from "./middleware/error";
