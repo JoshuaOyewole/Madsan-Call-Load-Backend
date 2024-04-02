@@ -3,19 +3,19 @@ const app = express();
 const dotenv = require("dotenv");
 dotenv.config();
 const cors = require("cors")
-import dbConnect from "./util/dbConnect";
+const dbConnect = require("./util/dbConnect");
 const cookieParser = require("cookie-parser");
 const bodyParser = require("body-parser");
 
 // MIDDLEWARES IMPORT
-import error from "./middleware/error";
+const error = require("./middleware/error");
 
-//ROUTES IMPORTATION
-import loginRoute from "./routes/auth/login";
-import ordersRoute from "./routes/orders/index";
-import stateRoute from "./routes/states/index";
-import companyRoute from "./routes/company/index";
-import purchaseRoute from "./routes/orders/index";
+//ROUTES IMPORTATION0
+const loginRoute = require("./routes/auth/login");
+const ordersRoute = require("./routes/orders/index");
+const stateRoute = require("./routes/states/index");
+const companyRoute = require("./routes/company/index");
+const purchaseRoute = require("./routes/orders/index");
 
 
 //DB INITIALIZATION
