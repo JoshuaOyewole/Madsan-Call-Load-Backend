@@ -55,9 +55,54 @@ export async function getOrder(req: Request, res: Response, next: NextFunction) 
 }
 export async function updateOrder(req: Request, res: Response, next: NextFunction) {
     try {
-        return res.status(StatusCodes.OK).json({ message: "work in progress in progress for this endpoint" })
+        const {
+            buyerCompanyName,
+            buyerCompanyId,
+            email,
+            sellerCompanyState,
+            sellerCompanyName,
+            pickupStateAddress,
+            buyerDestination,
+            quantity,
+            productAmount,
+            buyerPhoneNumber,
+            sellerCompanyId,
+            totalCost,
+            id
+        } = req.body;
+
+        const updateData = {
+            buyerCompanyName,
+            buyerCompanyId,
+            email,
+            sellerCompanyState,
+            sellerCompanyName,
+            pickupStateAddress,
+            buyerDestination,
+            quantity,
+            productAmount,
+            buyerPhoneNumber,
+            sellerCompanyId,
+            totalCost,
+            id
+        }
+        if (!id) {
+            return res.status(StatusCodes.OK).json({ message: "Kindly provide a valid ID" })
+        }
+
+        // Update the order document by ID
+        const updatedOrder = await OrderModel.findByIdAndUpdate(id, updateData, { new: true });
+
+        // Check if the order exists and was updated successfully
+        if (!updatedOrder) {
+            return res.status(404).json({ message: 'Order not found' });
+        }
+
+        // If the order was successfully updated, send the updated order object as response
+        res.json({ message: 'Order updated successfully', data: updatedOrder });
     } catch (error) {
         console.error('Error updating Order:', error);
+        res.status(500).json({ message: 'Internal server error' });
     }
 }
 export async function getAllOrders(req: Request, res: Response, next: NextFunction) {

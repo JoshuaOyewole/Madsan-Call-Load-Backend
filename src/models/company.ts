@@ -42,7 +42,6 @@ const companySchema: Schema = new mongoose.Schema({
     },
     phoneNumber: {
         type: String,
-        required: true,
         unique: true,
         maxLength: 200
     },

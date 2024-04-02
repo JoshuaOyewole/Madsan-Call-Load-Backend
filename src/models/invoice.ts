@@ -11,6 +11,7 @@ interface IOrder extends Document {
     buyerDestination: string;
     quantity: number;
     productAmount: number;
+    status?: string;
     totalCost: number;
     productName?: string;
     buyerPhoneNumber: string;
@@ -40,6 +41,11 @@ const invoiceSchema: Schema<IInvoice> = new Schema<IInvoice>({
     productName: { type: String },
     buyerPhoneNumber: { type: String, required: true },
     sellerCompanyId: { type: Schema.Types.ObjectId, ref: 'Company', required: true },
+    status: {
+        type: String,
+        default: 'pending',
+        enum: ['paid', 'pending']
+    },
     // Include additional fields for the Invoice document
     accountNumber: { type: String, required: true },
     accountName: { type: String, required: true },
