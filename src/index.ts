@@ -11,11 +11,11 @@ const bodyParser = require("body-parser");
 const error = require("./util/error");
 
 //ROUTES IMPORTATION0
-import loginRoute = require("./routes/auth/login");
-import ordersRoute = require("./routes/orders/index");
-import stateRoute = require("./routes/states/index");
-import companyRoute = require("./routes/company/index");
-import purchaseRoute = require("./routes/orders/index");
+const loginRoute = require("./routes/auth/login");
+const ordersRoute = require("./routes/orders/index");
+const stateRoute = require("./routes/states/index");
+const companyRoute = require("./routes/company/index");
+const purchaseRoute = require("./routes/orders/index");
 
 
 //DB INITIALIZATION
