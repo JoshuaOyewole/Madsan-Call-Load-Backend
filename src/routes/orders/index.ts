@@ -4,6 +4,6 @@ import { getAllOrders, updateOrder, makeOrder, getOrder } from "../../controller
 
 const router = express.Router();
 
-router.post('/', makeOrder).get('/', getAllOrders).put("/", updateOrder).get("/:id", getOrder);
+router.post('/', makeOrder).get('/', getAllOrders).put("/", updateOrder).get("/single", getOrder);
 
 export default router;

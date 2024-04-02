@@ -3,7 +3,7 @@ import mongoose, { Document, Schema, Types } from 'mongoose';
 // Define interface for the order document
 interface IOrder extends Document {
     buyerCompanyName: string,
-    buyerCompanyId: Types.ObjectId,
+    buyerCompanyId?: Types.ObjectId,
     email: string,
     sellerCompanyState: string,
     sellerCompanyName: string,
@@ -13,14 +13,14 @@ interface IOrder extends Document {
     totalCost: number,
     productAmount: number,
     productName?: string,
-    buyerPhoneNumber: string,
+    buyerPhoneNumber?: string,
     sellerCompanyId: Types.ObjectId;
 }
 
 // Define schema for the order document
 const OrderSchema = new Schema<IOrder>({
     buyerCompanyName: { type: String, required: true },
-    buyerCompanyId: { type: Schema.Types.ObjectId, ref: 'Company', required: true },
+    buyerCompanyId: { type: Schema.Types.ObjectId, ref: 'Company'},
     email: { type: String, required: true },
     sellerCompanyState: { type: String, required: true },
     sellerCompanyName: { type: String, required: true },
@@ -30,7 +30,7 @@ const OrderSchema = new Schema<IOrder>({
     productAmount: { type: Number, required: true },
     totalCost: { type: Number, required: true },
     productName: { type: String, },
-    buyerPhoneNumber: { type: String, required: true },
+    buyerPhoneNumber: { type: String},
     sellerCompanyId: { type: Schema.Types.ObjectId, ref: 'Company', required: true } // Reference to the Company model
 });
 

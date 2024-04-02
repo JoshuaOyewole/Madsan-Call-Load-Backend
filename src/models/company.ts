@@ -17,6 +17,7 @@ interface ICompany extends Document {
     accountNumber: string,
     accountName: string,
     bankName: string,
+    price: string,
     states: string[],
     branches: IBranchLocation[];
 }

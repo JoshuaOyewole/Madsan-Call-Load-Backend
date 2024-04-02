@@ -6,17 +6,17 @@ import OrderModel from "../../models/orders";
 
 export async function makeOrder(req: Request, res: Response, next: NextFunction) {
 
-    const { buyerCompanyName, email, sellerCompanyState, sellerCompanyName, pickupStateAddress, buyerDestination, quantity, productAmount, productName, buyerPhoneNumber, sellerCompanyId, buyerCompanyId } = req.body;
+    const { buyerCompanyName, email, sellerCompanyState, sellerCompanyName, pickupStateAddress, buyerDestination, quantity, productAmount, totalCost, sellerCompanyId, buyerCompanyId } = req.body;
 
     try {
         // If incomplete data is sent, return 400 Not Found
-        if (!buyerCompanyName || !email || !sellerCompanyState || !sellerCompanyName || !pickupStateAddress || !buyerDestination || quantity || !productAmount || !buyerPhoneNumber || !sellerCompanyId) {
+        if (!buyerCompanyName || !email || !sellerCompanyState || !sellerCompanyName || !pickupStateAddress || !buyerDestination || !quantity || !productAmount || !sellerCompanyId || !totalCost) {
             return res.status(StatusCodes.BAD_REQUEST).json({ data: { message: 'Some required fields are missing!' } });
         }
         else {
-            let prooduct_totalCost = parseInt(quantity) * parseInt(productAmount);
+            //let prooduct_totalCost = parseInt(quantity) * parseInt(productAmount);
 
-            const newOrder = await OrderModel.create({ buyerCompanyName, email, sellerCompanyState, sellerCompanyName, pickupStateAddress, buyerDestination, quantity, totalCost: prooduct_totalCost, productAmount, productName, buyerPhoneNumber, sellerCompanyId, buyerCompanyId });
+            const newOrder = await OrderModel.create({ buyerCompanyName, email, sellerCompanyState, sellerCompanyName, pickupStateAddress, buyerDestination, quantity, totalCost, productAmount, sellerCompanyId, buyerCompanyId });
 
 
             return res.status(StatusCodes.OK).json({ data: { id: newOrder._id, message: `Purchase Successfull!` } })
@@ -34,13 +34,14 @@ export async function makeOrder(req: Request, res: Response, next: NextFunction)
 export async function getOrder(req: Request, res: Response, next: NextFunction) {
 
     const { id } = req.query;
+
     try {
         if (!id) {
             return res.status(StatusCodes.BAD_REQUEST).json({ message: 'Kindly enter a valid Order Id' });
         }
-        const orders = await OrderModel.findById(id);
+        const orders = await OrderModel.findById({ _id: id });
         // If order is not found, return 404 Not Found
-        if (orders.length === 0) {
+        if (!orders || orders.length === 0) {
             return res.status(StatusCodes.NOT_FOUND).json({ message: 'No Order was found' });
         }
         // If order is found, return it

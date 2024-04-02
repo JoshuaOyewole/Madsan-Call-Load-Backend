@@ -51,6 +51,81 @@ export async function companiesByState(req: Request, res: Response, next: NextFu
     }
 
 }
+export async function getBranchesBystate(req: Request, res: Response, next: NextFunction) {
+    const { state } = req.query;
+
+    try {
+        const branches = await Company.aggregate([
+            { $match: { states: state } },
+            { $unwind: "$branches" },
+            { $match: { "branches.state": state } },
+            {
+                $project: {
+                    _id: "$branches._id",
+                    state: "$branches.state",
+                    address: "$branches.address"
+                }
+            }
+        ]);
+        // If no branches found for the state, send a 404 response
+        if (!branches || branches.length === 0) {
+            return res.status(StatusCodes.NOT_FOUND).json({ data: branches, message: 'No branches found for the specified state' });
+        }
+        // Return the branches of the selected state
+        return res.status(StatusCodes.OK).json({ data: branches });
+
+        /*   const companies = await Company.find({ states: state });
+  
+        
+          if (!companies || companies.length === 0) {
+              return res.status(StatusCodes.NOT_FOUND).json({ data: companies, message: 'No Branch location was found for specific location' });
+          }
+        
+          let branches: any[] = [];
+          companies.forEach(company => {
+              branches = branches.concat(company.branches.map((branch: { _id: string; state: string; address: string; }) => ({
+                  _id: branch._id,
+                  state: branch.state,
+                  address: branch.address
+              })))
+          })
+  
+      
+          if (branches.length === 0) {
+              return res.status(404).json({ message: 'No branches found for the specified state' });
+          }
+  
+          return res.status(StatusCodes.OK).json({ data: branches }) */
+    }
+
+    catch (error: any) {
+        // Handle server errors
+        console.error('Error fetching branches by state:', error);
+        //throw new Error(error);
+        next(createError(StatusCodes.INTERNAL_SERVER_ERROR, `${error.message})}`))
+    }
+
+}
+export async function companiesByLocation(req: Request, res: Response, next: NextFunction) {
+    const { locationId } = req.query;
+
+    try {
+        // Find companies that have the specified location ID
+        const companies = await Company.find({ "branches._id": locationId }).select('companyName price');
+
+        // If no companies found for the location ID, send a 404 response
+        if (!companies || companies.length === 0) {
+            return res.status(StatusCodes.NOT_FOUND).json({ data: companies, message: 'No companies found for the specified location ID' });
+        }
+        // Return the companies
+        return res.status(StatusCodes.OK).json({ data: companies });
+
+    } catch (error) {
+        console.error('Error fetching Company branches:', error);
+        //throw new Error(error);
+        next(createError(StatusCodes.INTERNAL_SERVER_ERROR, `${error.message})}`))
+    }
+}
 export async function companyBranches(req: Request, res: Response, next: NextFunction) {
     const { companyId, state } = req.query;
 
@@ -126,8 +201,6 @@ export async function getCompanies(req: Request, res: Response, next: NextFuncti
 export async function getCompany(req: Request, res: Response, next: NextFunction) {
 
     const id = req.params.id;
-
-    console.log(id);
 
     if (!id) {
         return res.status(StatusCodes.BAD_REQUEST).json({ data: { message: "Kindly enter a valid Company ID" } })
