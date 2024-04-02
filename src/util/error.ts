@@ -9,5 +9,4 @@ const createError = (status: number, message: string) => {
   err.status =status;
   return err;
 };
-
-export default createError; 
+module.exports = createError;

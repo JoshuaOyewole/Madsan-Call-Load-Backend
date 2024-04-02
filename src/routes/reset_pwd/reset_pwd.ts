@@ -1,4 +1,4 @@
-import express from 'express';
+const express = require('express');
 import { resetPWD } from '../../controllers/forgot_password/index';
 
 const router = express.Router();
@@ -6,4 +6,4 @@ const router = express.Router();
 //RESET PASSWORD
 router.post('/', resetPWD);
 
-export default router;
+module.exports = router;

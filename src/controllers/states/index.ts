@@ -1,6 +1,6 @@
 import StateModel from "../../models/states";
 import { Request, Response, NextFunction } from 'express';
-import createError from "../../util/error";
+const createError = require("../../util/error");
 import { StatusCodes } from "http-status-codes";
 
 

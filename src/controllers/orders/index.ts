@@ -1,6 +1,6 @@
 import { NextFunction, Request, Response } from "express";
 import { StatusCodes } from "http-status-codes";
-import createError from "../../util/error";
+const createError = require("../../util/error");
 import OrderModel from "../../models/orders";
 
 

@@ -1,5 +1,5 @@
 import jwt from "jsonwebtoken";
-import createError from "../util/error";
+const createError = require("../util/error");
 import { Request, Response, NextFunction } from 'express';
 
 const verifyToken = (req: Request, res: Response, next: NextFunction) => {

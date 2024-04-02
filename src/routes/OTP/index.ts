@@ -1,4 +1,4 @@
-import express from 'express';
+const express = require('express');
 import { sendOTPController } from '../../controllers/OTP/index';
 
 const router = express.Router();
@@ -6,4 +6,4 @@ const router = express.Router();
 //USER LOGIN
 router.post('/', sendOTPController);
 
-export default router;
+module.exports = router;

@@ -1,6 +1,6 @@
 
 import { Request, Response, NextFunction } from 'express';
-import createError from "../../util/error";
+const createError = require("../../util/error");
 import { sendOTP, verifyOTP, deleteOTP } from "../../util/OTP";
 import { hashData } from "../../util/hashData";
 import Company from "../../models/company";

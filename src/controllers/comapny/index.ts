@@ -1,8 +1,8 @@
 import { NextFunction, Request, Response } from "express";
 import { StatusCodes } from "http-status-codes";
 import Company from "../../models/company";
-import createError from "../../util/error";
-import bcrypt from "bcrypt"
+const createError = require("../../util/error");
+const bcrypt = require("bcryptjs");
 import StateModel from "../../models/states";
 
 // Function to check if email or phone number already exists

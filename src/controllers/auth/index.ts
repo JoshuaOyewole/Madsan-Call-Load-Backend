@@ -1,8 +1,8 @@
 import User from "../../models/company";
 import { Request, Response, NextFunction } from 'express';
-import bcrypt from "bcryptjs";
-import createError from "../../util/error";
-import jwt from "jsonwebtoken";
+const bcrypt = require("bcryptjs");
+const createError = require("../../util/error");
+const jwt = require("jsonwebtoken");
 import { StatusCodes } from "http-status-codes";
 
 //User Registration
